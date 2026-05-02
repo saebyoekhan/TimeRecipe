@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { RecipeDefinition } from '@/lib/types';
-import { useLongPress } from '@/hooks/useLongPress';
 import PixelFood from '@/components/shared/PixelFood';
 
 interface RecipeCardProps {
@@ -11,7 +10,6 @@ interface RecipeCardProps {
   total: number;
   isSelected: boolean;
   onSelect: () => void;
-  onLongPressComplete: () => void;
 }
 
 export default function RecipeCard({
@@ -20,12 +18,7 @@ export default function RecipeCard({
   total,
   isSelected,
   onSelect,
-  onLongPressComplete,
 }: RecipeCardProps) {
-  const { progress, isPressing, handlers } = useLongPress({
-    onComplete: onLongPressComplete,
-  });
-
   const centerIndex = (total - 1) / 2;
   const offset = index - centerIndex;
   const rotate = offset * 3;
@@ -34,7 +27,7 @@ export default function RecipeCard({
   return (
     <motion.div
       layoutId={`recipe-card-${recipe.food}`}
-      className="no-context-menu cursor-pointer"
+      className="cursor-pointer"
       initial={{ opacity: 0, y: 30, rotate: 0 }}
       animate={{
         opacity: 1,
@@ -58,7 +51,6 @@ export default function RecipeCard({
                       ? 'wood-card-active text-white'
                       : 'wood-card text-neutral'
                     }`}
-        {...(isSelected ? handlers : {})}
       >
         <div className="mt-1">
           <PixelFood food={recipe.food} phase={3} size={48} />
@@ -69,22 +61,6 @@ export default function RecipeCard({
           </p>
           <p className="text-base font-bold">{recipe.label}</p>
         </div>
-
-        {/* 롱프레스 프로그레스 */}
-        {isSelected && isPressing && (
-          <div className="absolute inset-0 rounded-xl overflow-hidden">
-            <div
-              className="absolute bottom-0 left-0 right-0 bg-white/20 transition-none"
-              style={{ height: `${progress * 100}%` }}
-            />
-          </div>
-        )}
-
-        {isSelected && !isPressing && (
-          <p className="absolute -bottom-6 left-0 right-0 text-[10px] text-center text-brown-light/60">
-            꾹 눌러서 시작
-          </p>
-        )}
       </div>
     </motion.div>
   );

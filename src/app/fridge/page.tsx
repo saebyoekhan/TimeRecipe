@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { getHistory } from '@/lib/storage';
 import { CookingRecord } from '@/lib/types';
 import FridgeGrid from '@/components/fridge/FridgeGrid';
+import BottomDock from '@/components/shared/BottomDock';
 
 export default function FridgePage() {
   const router = useRouter();
@@ -18,17 +19,11 @@ export default function FridgePage() {
   const goldenCount = records.filter((r) => r.status === 'golden').length;
 
   return (
-    <main className="flex-1 flex flex-col py-8 px-6 wood-bg">
+    <main className="flex-1 flex flex-col wood-bg">
+      <div className="flex-1 flex flex-col py-8 px-6">
       {/* 헤더 */}
-      <div className="flex items-center justify-between mb-6">
-        <button
-          onClick={() => router.push('/')}
-          className="text-sm text-brown-light/60 hover:text-brown font-medium transition-colors"
-        >
-          ← 돌아가기
-        </button>
+      <div className="flex items-center justify-center mb-6">
         <h1 className="text-lg font-bold text-brown">🧊 냉장고</h1>
-        <div className="w-16" />
       </div>
 
       {/* 통계 */}
@@ -57,6 +52,10 @@ export default function FridgePage() {
 
       {/* 그리드 */}
       <FridgeGrid records={records} />
+      </div>
+
+      {/* 하단 독바 */}
+      <BottomDock />
     </main>
   );
 }
