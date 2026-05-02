@@ -115,6 +115,38 @@ export default function CookingPage() {
         />
       </motion.div>
 
+      {/* 가스 불꽃 효과 (프라이팬 하단) */}
+      {timer.isRunning && (
+        <div
+          className="absolute z-[5] pointer-events-none flex justify-center items-end gap-1"
+          style={{ top: '68%', left: '50%', transform: 'translateX(-50%)', width: '200px', height: '40px' }}
+        >
+          {[...Array(7)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="rounded-full"
+              style={{
+                width: `${8 + Math.random() * 6}px`,
+                background: i % 2 === 0
+                  ? 'linear-gradient(to top, #1565C0, #42A5F5, #FF8F00)'
+                  : 'linear-gradient(to top, #0D47A1, #64B5F6, #FFA726)',
+              }}
+              animate={{
+                height: [12, 20 + Math.random() * 15, 10, 22 + Math.random() * 10, 12],
+                opacity: [0.7, 1, 0.6, 1, 0.7],
+                scaleX: [1, 0.8, 1.1, 0.9, 1],
+              }}
+              transition={{
+                duration: 0.4 + Math.random() * 0.3,
+                repeat: Infinity,
+                delay: i * 0.08,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </div>
+      )}
+
       {/* 하단: 타이머 + 정지 버튼 (배경의 버너 손잡이 부근) */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-5 z-20 w-full px-6">
         <TimerDisplay
