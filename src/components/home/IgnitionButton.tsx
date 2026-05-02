@@ -13,42 +13,42 @@ export default function IgnitionButton({ onIgnite }: IgnitionButtonProps) {
   });
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center justify-center">
       <motion.div
-        className="no-context-menu relative"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.3 }}
+        className="no-context-menu relative w-16 h-16 rounded-full flex items-center justify-center cursor-pointer"
+        initial={{ scale: 1 }}
+        animate={{ scale: isPressing ? 1.1 : 1 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         {...handlers}
       >
-        {/* 픽셀아트 느낌의 레트로 버튼 */}
-        <div className={`w-24 h-16 flex items-center justify-center cursor-pointer border-4 border-black
-                        transition-all duration-75 relative bg-point text-white text-lg font-bold
-                        ${isPressing
-                          ? 'shadow-[2px_2px_0px_rgba(0,0,0,0.8)] translate-y-[2px] translate-x-[2px] bg-point-dark'
-                          : 'shadow-[4px_4px_0px_rgba(0,0,0,0.8)]'
-                        }`}
-        >
-          <div className="flex items-center gap-2">
-            <span>{isPressing ? '🔥' : '🔥'}</span>
-            <span className="text-pixel-stroke tracking-widest">IGNITE</span>
-          </div>
-          
-          {/* 프로그레스 바 (버튼 테두리 대신 내부 게이지로) */}
-          {isPressing && (
-            <div className="absolute bottom-0 left-0 h-1.5 bg-yellow-400 border-t-2 border-black" 
-                 style={{ width: `${progress * 100}%` }} />
-          )}
-        </div>
+        {/* 눌렀을 때만 나타나는 게이지/효과 */}
+        {isPressing && (
+          <>
+            <div className="absolute inset-0 rounded-full bg-point-dark/40 animate-pulse" />
+            <svg className="absolute inset-[-10px] w-[calc(100%+20px)] h-[calc(100%+20px)] -rotate-90 pointer-events-none" viewBox="0 0 100 100">
+              <circle
+                cx="50" cy="50" r="46"
+                fill="none"
+                stroke="#FF6F00"
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeDasharray={`${2 * Math.PI * 46}`}
+                strokeDashoffset={`${2 * Math.PI * 46 * (1 - progress)}`}
+                className="transition-all duration-75"
+              />
+            </svg>
+            <span className="absolute -top-10 text-2xl animate-bounce">🔥</span>
+          </>
+        )}
       </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="text-xs text-cream text-pixel-stroke font-medium tracking-widest"
+        className="absolute -bottom-8 whitespace-nowrap text-xs text-cream text-pixel-stroke font-medium tracking-widest pointer-events-none"
       >
-        {isPressing ? '점화 중...' : '꾹 눌러서 점화'}
+        {isPressing ? '점화 중...' : '손잡이를 꾹 누르세요'}
       </motion.p>
     </div>
   );

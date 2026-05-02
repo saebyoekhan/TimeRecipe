@@ -26,13 +26,13 @@ export default function PanPreview({ recipeType, onIgnite }: PanPreviewProps) {
         <PixelFood food={recipeType} phase={1} size={100} />
       </motion.div>
 
-      {/* 점화 버튼 (가스레인지 손잡이 위치 부근) */}
+      {/* 점화 버튼 (가스레인지 가운데 손잡이에 일치) */}
       <motion.div 
         className="absolute z-20 pointer-events-auto"
-        style={{ bottom: '15%', left: '50%', x: '-50%' }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
+        style={{ top: '74%', left: '50%', x: '-50%', y: '-50%' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         <IgnitionButton onIgnite={onIgnite} />
       </motion.div>

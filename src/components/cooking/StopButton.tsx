@@ -19,7 +19,7 @@ export default function StopButton({ onStop, isOvertime }: StopButtonProps) {
                     : 'bg-point'
                   }`}
     >
-      {isOvertime ? '🔥 꺼내기' : '🍽️ 서빙하기'}
+      {isOvertime ? '🔥 꺼내기' : '🍽️ 완료하기'}
     </motion.button>
   );
 }
