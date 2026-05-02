@@ -104,7 +104,7 @@ const cardConfig: Record<CookingStatus, {
 export default function ResultCard({ record }: ResultCardProps) {
   const recipe = RECIPES[record.recipeDuration];
   const isGolden = record.status === 'golden';
-  const config = cardConfig[record.status];
+  const config = cardConfig[record.status] ?? cardConfig.good;
   const deviationSign = record.deviationSeconds > 0 ? '+' : record.deviationSeconds < 0 ? '-' : '';
 
   return (

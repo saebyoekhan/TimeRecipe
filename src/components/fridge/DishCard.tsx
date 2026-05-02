@@ -79,7 +79,7 @@ const cardStyles = {
 
 export default function DishCard({ record, index }: DishCardProps) {
   const recipe = RECIPES[record.recipeDuration];
-  const style = cardStyles[record.status];
+  const style = cardStyles[record.status] ?? cardStyles.good;
   const isGolden = record.status === 'golden';
   const isAbandoned = record.status === 'abandoned';
 
