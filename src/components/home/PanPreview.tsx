@@ -14,10 +14,10 @@ interface PanPreviewProps {
 export default function PanPreview({ recipeType, onIgnite }: PanPreviewProps) {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* 음식 (배경의 프라이팬 정중앙에 위치) */}
+      {/* 음식 (배경의 프라이팬 중앙) */}
       <motion.div
         className="absolute z-10 pointer-events-auto"
-        style={{ top: '48%', left: '50%', x: '-50%', y: '-50%' }}
+        style={{ top: '53%', left: '50%', x: '-50%', y: '-50%' }}
         initial={{ scale: 0, y: -50, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
         exit={{ scale: 0, opacity: 0 }}
@@ -26,10 +26,10 @@ export default function PanPreview({ recipeType, onIgnite }: PanPreviewProps) {
         <PixelFood food={recipeType} phase={1} size={160} />
       </motion.div>
 
-      {/* 점화 버튼 (가스레인지 가운데 손잡이에 일치) */}
-      <motion.div 
+      {/* 점화 버튼 (가스레인지 가운데 손잡이) */}
+      <motion.div
         className="absolute z-20 pointer-events-auto"
-        style={{ top: '74%', left: '50%', x: '-50%', y: '-50%' }}
+        style={{ top: '76%', left: '50%', x: '-50%', y: '-50%' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
