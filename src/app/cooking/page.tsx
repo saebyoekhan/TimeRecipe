@@ -103,7 +103,7 @@ export default function CookingPage() {
       {/* 음식 프로그레스 (배경의 프라이팬 정중앙) */}
       <motion.div
         className="absolute z-10 pointer-events-none"
-        style={{ top: '48%', left: '50%', x: '-50%', y: '-50%' }}
+        style={{ top: '54%', left: '50%', x: '-50%', y: '-50%' }}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 20 }}

@@ -21,30 +21,28 @@ export default function FoodProgress({ recipeDuration, recipeType, phase }: Food
   const recipe = RECIPES[recipeDuration];
 
   return (
-    <div className="flex flex-col items-center">
-      {/* 픽셀 연기 효과 (익는 중, 혹은 완료 시) */}
-      {phase >= 2 && (
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-full h-32 pointer-events-none flex justify-center gap-6">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="w-4 h-4 bg-white/60 rounded-full blur-sm"
-              animate={{
-                y: [0, -40, -80],
-                x: [0, i % 2 === 0 ? 20 : -20, i % 2 === 0 ? 40 : -40],
-                opacity: [0, 0.6, 0],
-                scale: [1, 2, 3],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                delay: i * 0.8,
-                ease: 'easeOut',
-              }}
-            />
-          ))}
-        </div>
-      )}
+    <div className="flex flex-col items-center relative">
+      {/* 픽셀 연기 효과 (조리 중에는 항상 표시) */}
+      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-full h-32 pointer-events-none flex justify-center gap-6">
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            className="w-4 h-4 bg-white/60 rounded-full blur-sm"
+            animate={{
+              y: [0, -40, -80],
+              x: [0, i % 2 === 0 ? 20 : -20, i % 2 === 0 ? 40 : -40],
+              opacity: [0, 0.6, 0],
+              scale: [1, 2, 3],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              delay: i * 0.8,
+              ease: 'easeOut',
+            }}
+          />
+        ))}
+      </div>
 
       <AnimatePresence mode="wait">
         <motion.div
