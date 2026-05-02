@@ -59,10 +59,11 @@ function ResultContent() {
   const isGolden = record.status === 'golden';
   const needsReason = !isGolden && !reasonSaved;
 
-  return (
-    <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 wood-bg">
+    <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 relative pixel-bg">
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-0" />
+      
       {/* 축하 or 결과 */}
-      <div className="flex-1 flex flex-col items-center justify-center gap-8 w-full">
+      <div className="z-10 flex-1 flex flex-col items-center justify-center gap-8 w-full">
         {isGolden && <GoldenTimeBadge />}
         <ResultCard record={record} />
         {needsReason && <FailReasonInput onSave={handleSaveReason} />}
@@ -73,17 +74,17 @@ function ResultContent() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2 }}
-        className="flex gap-3 mt-8"
+        className="flex gap-3 mt-8 z-10"
       >
         <button
           onClick={() => router.push('/')}
-          className="px-6 py-2.5 rounded-xl bg-point text-white text-sm font-bold pixel-shadow"
+          className="px-6 py-2.5 bg-point text-white text-sm font-bold border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,0.8)] tracking-widest hover:-translate-y-1 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.8)] transition-all"
         >
           🍳 다시 요리하기
         </button>
         <button
           onClick={() => router.push('/fridge')}
-          className="px-6 py-2.5 rounded-xl bg-wood/20 text-brown-light text-sm font-bold pixel-shadow"
+          className="px-6 py-2.5 bg-wood text-cream text-sm font-bold border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,0.8)] tracking-widest hover:-translate-y-1 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.8)] transition-all"
         >
           🧊 냉장고 열기
         </button>
