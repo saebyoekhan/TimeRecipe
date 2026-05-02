@@ -17,128 +17,99 @@ function formatGap(seconds: number): string {
   const s = abs % 60;
   if (m === 0) return `${sign}${s}초`;
   if (s === 0) return `${sign}${m}분`;
-  return `${sign}${m}분 ${s}초`;
-}
-
-function formatActual(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  if (s === 0) return `${m}분`;
-  return `${m}분 ${s}초`;
+  return `${sign}${m}분${s}초`;
 }
 
 const cardStyles = {
   golden: {
     border: 'border-yellow-500/80',
     bg: 'bg-yellow-900/40',
-    iconBg: 'bg-yellow-950/50 border-yellow-600/40',
-    glow: 'shadow-[4px_4px_0px_rgba(0,0,0,0.6),inset_0_0_20px_rgba(255,200,0,0.08)]',
+    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6),inset_0_0_20px_rgba(255,200,0,0.08)]',
     hoverBorder: 'hover:border-yellow-400',
-    badge: 'bg-yellow-600 text-white',
-    badgeLabel: '⭐ PERFECT',
-    gapColor: 'text-yellow-400',
+    gapColor: 'text-yellow-300',
+    statusIcon: '⭐',
   },
   done: {
     border: 'border-wood-dark',
     bg: 'bg-black/70',
-    iconBg: 'bg-black/40 border-wood-dark/50',
-    glow: 'shadow-[4px_4px_0px_rgba(0,0,0,0.6)]',
+    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6)]',
     hoverBorder: 'hover:border-point',
-    badge: 'bg-point text-white',
-    badgeLabel: '✅ 완료',
     gapColor: 'text-point',
+    statusIcon: '✅',
   },
   burned: {
     border: 'border-red-800/80',
     bg: 'bg-red-950/50',
-    iconBg: 'bg-red-950/60 border-red-800/40',
-    glow: 'shadow-[4px_4px_0px_rgba(0,0,0,0.6),inset_0_0_15px_rgba(200,0,0,0.1)]',
+    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6),inset_0_0_15px_rgba(200,0,0,0.1)]',
     hoverBorder: 'hover:border-red-500',
-    badge: 'bg-danger text-white',
-    badgeLabel: '🔥 타버림',
     gapColor: 'text-red-400',
+    statusIcon: '🔥',
   },
   abandoned: {
     border: 'border-gray-600/50',
     bg: 'bg-gray-900/60',
-    iconBg: 'bg-gray-900/50 border-gray-700/40',
-    glow: 'shadow-[4px_4px_0px_rgba(0,0,0,0.6)]',
+    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6)]',
     hoverBorder: 'hover:border-gray-400',
-    badge: 'bg-gray-600 text-gray-300',
-    badgeLabel: '⏸️ 방치',
     gapColor: 'text-gray-400',
+    statusIcon: '⏸️',
   },
 };
 
 export default function DishCard({ record, index }: DishCardProps) {
   const recipe = RECIPES[record.recipeDuration];
   const style = cardStyles[record.status];
-  const date = new Date(record.startedAt);
-  const dateStr = `${date.getMonth() + 1}/${date.getDate()}`;
   const isGolden = record.status === 'golden';
   const isBurned = record.status === 'burned' || record.status === 'abandoned';
+  const isAbandoned = record.status === 'abandoned';
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05, type: 'spring', stiffness: 300, damping: 25 }}
-      className={`${style.bg} border-2 ${style.border} ${style.glow} p-3 flex flex-col items-center gap-1.5
-                  hover:-translate-y-1 ${style.hoverBorder} hover:shadow-[6px_6px_0px_rgba(0,0,0,0.6)]
+      className={`${style.bg} border-2 ${style.border} ${style.glow} p-3 flex flex-col items-center gap-1
+                  hover:-translate-y-1 ${style.hoverBorder} hover:shadow-[5px_5px_0px_rgba(0,0,0,0.6)]
                   transition-all cursor-default relative overflow-hidden`}
     >
-      {/* Golden 반짝임 효과 */}
+      {/* Golden 반짝임 */}
       {isGolden && (
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
-            className="absolute top-1 right-2 text-[8px]"
+            className="absolute top-1 right-2 text-[8px] text-yellow-300"
             animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+            transition={{ duration: 2, repeat: Infinity }}
           >✦</motion.div>
           <motion.div
-            className="absolute top-3 left-2 text-[6px]"
+            className="absolute bottom-2 left-2 text-[6px] text-yellow-300"
             animate={{ opacity: [0.2, 0.8, 0.2] }}
             transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
           >✦</motion.div>
         </div>
       )}
 
-      {/* 음식 아이콘 */}
-      <div className={`w-full ${style.iconBg} border-2 py-2.5 flex justify-center ${isBurned ? 'opacity-60' : ''}`}>
+      {/* 음식 아이콘 (배경 박스 제거, 크기 키움) */}
+      <div className={`py-1 ${isBurned ? 'opacity-50 grayscale-[30%]' : ''}`}>
         <PixelFood
           food={record.recipeType}
           phase={isBurned ? 1 : 3}
-          size={56}
+          size={72}
         />
       </div>
 
-      {/* 요리명 + 목표시간 */}
-      <p className="text-[10px] font-bold text-wood-light tracking-widest">
-        {recipe.displayName} · {recipe.label}
+      {/* 요리명 (볼드, 메인) */}
+      <p className="text-xs font-bold text-cream tracking-widest">
+        {recipe.displayName}
       </p>
 
-      {/* 할일 이름 */}
-      <p className="text-[9px] text-cream/50 truncate w-full text-center">
-        &quot;{record.taskName}&quot;
+      {/* 뱃지 + 오차 한 줄 통합 (핵심 정보) */}
+      <p className={`text-sm font-bold tracking-wider ${style.gapColor}`}>
+        {style.statusIcon} {isAbandoned ? '방치' : formatGap(record.deviationSeconds)}
       </p>
 
-      {/* 상태 뱃지 */}
-      <span className={`text-[9px] px-2 py-0.5 border border-black font-bold shadow-[1px_1px_0px_rgba(0,0,0,1)] ${style.badge}`}>
-        {style.badgeLabel}
-      </span>
-
-      {/* 시간 오차 (핵심 정보) */}
-      <div className="w-full text-center">
-        <p className={`text-xs font-bold tracking-wider ${style.gapColor}`}>
-          {record.status === 'abandoned' ? '—' : formatGap(record.deviationSeconds)}
-        </p>
-        <p className="text-[8px] text-cream/30 mt-0.5">
-          실제 {formatActual(record.actualSeconds)}
-        </p>
-      </div>
-
-      {/* 날짜 */}
-      <p className="text-[8px] text-cream/25 font-bold">{dateStr}</p>
+      {/* 할일 + 목표시간 (서브텍스트) */}
+      <p className="text-[9px] text-cream/35 truncate w-full text-center">
+        {record.taskName} · {recipe.label}
+      </p>
     </motion.div>
   );
 }
