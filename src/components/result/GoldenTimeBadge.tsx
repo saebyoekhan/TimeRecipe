@@ -12,26 +12,18 @@ export default function GoldenTimeBadge() {
     >
       <motion.div
         className="text-6xl"
-        animate={{ rotate: [0, -10, 10, -5, 5, 0] }}
-        transition={{ duration: 0.6, delay: 0.6 }}
+        animate={{ rotate: [0, -10, 10, -5, 5, 0], scale: [1, 1.2, 1] }}
+        transition={{ duration: 0.8, delay: 0.6 }}
       >
-        ⭐
+        🏆
       </motion.div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-        className="text-xl font-bold text-point-dark"
+        className="text-2xl font-bold text-yellow-300 text-pixel-stroke tracking-widest"
       >
         Golden Time!
-      </motion.p>
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="text-sm text-brown-light/60"
-      >
-        완벽한 타이밍이에요
       </motion.p>
     </motion.div>
   );
