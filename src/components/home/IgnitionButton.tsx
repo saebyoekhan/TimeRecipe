@@ -15,22 +15,16 @@ export default function IgnitionButton({ onIgnite }: IgnitionButtonProps) {
   return (
     <div className="flex flex-col items-center justify-center relative">
       <motion.div
-        className="no-context-menu relative w-14 h-14 flex items-center justify-center cursor-pointer"
-        initial={{ scale: 1 }}
-        animate={{ 
-          scale: isPressing ? 1.05 : 1,
-          rotate: isPressing ? progress * 90 : 0,
-        }}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+        className="no-context-menu relative w-[44px] h-[44px] flex items-center justify-center cursor-pointer"
         {...handlers}
       >
         {/* 누르기 전: 깜빡이는 가이드 링 */}
         {!isPressing && (
           <motion.div
-            className="absolute inset-[-6px] rounded-full border-2 border-point/60 pointer-events-none"
+            className="absolute inset-[-8px] rounded-full border-2 border-point/60 pointer-events-none"
             animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.6, 0, 0.6],
+              scale: [1, 1.4, 1],
+              opacity: [0.5, 0, 0.5],
             }}
             transition={{
               duration: 1.5,
@@ -40,16 +34,30 @@ export default function IgnitionButton({ onIgnite }: IgnitionButtonProps) {
           />
         )}
 
+        {/* 손잡이 오버레이 (배경 손잡이 위에 겹쳐서 회전) */}
+        <motion.div
+          className="w-[44px] h-[44px] rounded-full relative"
+          animate={{
+            rotate: isPressing ? progress * 90 : 0,
+          }}
+          transition={{ type: 'tween', ease: 'linear', duration: 0.05 }}
+        >
+          {/* 손잡이 본체 */}
+          <div className="absolute inset-0 rounded-full bg-[#3a3a3a] border-[3px] border-[#2a2a2a] shadow-inner" />
+          {/* 손잡이 위의 세로 표시선 (위치 인디케이터) */}
+          <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-[6px] h-[12px] bg-[#666] rounded-sm" />
+        </motion.div>
+
         {/* 꾹 누르면 손잡이 주변에 붉은 빛이 퍼지는 효과 */}
         {isPressing && (
           <motion.div
-            className="absolute inset-[-8px] rounded-full pointer-events-none"
+            className="absolute inset-[-10px] rounded-full pointer-events-none"
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 0.6, repeat: Infinity }}
+            animate={{ opacity: [0.2, 0.5, 0.2] }}
+            transition={{ duration: 0.8, repeat: Infinity }}
             style={{
-              background: `radial-gradient(circle, rgba(255,107,53,${0.3 + progress * 0.5}) 0%, rgba(255,60,0,${progress * 0.3}) 60%, transparent 100%)`,
-              boxShadow: `0 0 ${8 + progress * 20}px ${4 + progress * 10}px rgba(255,107,53,${0.2 + progress * 0.4})`,
+              background: `radial-gradient(circle, rgba(255,107,53,${0.2 + progress * 0.6}) 0%, transparent 70%)`,
+              boxShadow: `0 0 ${10 + progress * 25}px ${5 + progress * 12}px rgba(255,80,0,${0.15 + progress * 0.4})`,
             }}
           />
         )}
