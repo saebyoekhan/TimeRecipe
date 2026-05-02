@@ -88,42 +88,7 @@ export default function CookingPage() {
 
   return (
     <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 relative overflow-hidden counter-bg">
-      {/* 가스 화구 배경 */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: '-5%' }}>
-        {/* 화구 외곽 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.15 }}
-          transition={{ duration: 0.6 }}
-          className="w-72 h-72 rounded-full border-[6px] border-counter-edge"
-        />
-        {/* 화구 내부 링 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.12 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="absolute w-56 h-56 rounded-full border-4 border-counter-edge"
-        />
-        {/* 화구 십자 격자 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.08 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="absolute w-60 h-60 flex items-center justify-center"
-        >
-          <div className="absolute w-full h-1 bg-counter-edge rounded-full" />
-          <div className="absolute w-1 h-full bg-counter-edge rounded-full" />
-          <div className="absolute w-full h-1 bg-counter-edge rounded-full rotate-45" />
-          <div className="absolute w-1 h-full bg-counter-edge rounded-full rotate-45" />
-        </motion.div>
-        {/* 중앙 원 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="absolute w-20 h-20 rounded-full bg-counter-edge"
-        />
-      </div>
+      {/* 배경은 counter-bg 클래스의 이미지로 처리됨 */}
 
       {/* 할일 이름 */}
       <motion.div

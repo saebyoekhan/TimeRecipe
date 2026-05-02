@@ -45,35 +45,20 @@ body {
 
 /* 나무결 배경 패턴 */
 .wood-bg {
-  background-color: #F5E1C0;
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 40px,
-      rgba(139, 105, 20, 0.03) 40px,
-      rgba(139, 105, 20, 0.03) 41px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 8px,
-      rgba(139, 105, 20, 0.02) 8px,
-      rgba(139, 105, 20, 0.02) 9px
-    );
+  background-color: var(--color-base);
+  background-image: url('/backgrounds/kitchen_bg.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 }
 
 /* 조리대 배경 */
 .counter-bg {
-  background: linear-gradient(
-    180deg,
-    #F5E1C0 0%,
-    #F0D9B5 40%,
-    #C4956A 40.5%,
-    #D4A574 41%,
-    #E8CBA7 42%,
-    #DFC19D 100%
-  );
+  background-color: var(--color-base);
+  background-image: url('/backgrounds/burner_bg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 /* 가스 화구 스타일 */
