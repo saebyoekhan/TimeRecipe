@@ -13,7 +13,8 @@ export default function StopButton({ onStop, isOvertime }: StopButtonProps) {
       onClick={onStop}
       whileTap={{ scale: 0.95, y: 4, x: 4, boxShadow: '0px 0px 0px rgba(0,0,0,0.8)' }}
       className={`px-8 py-3 text-white font-bold text-lg tracking-widest border-4 border-black
-                  shadow-[4px_4px_0px_rgba(0,0,0,0.8)] transition-colors
+                  shadow-[4px_4px_0px_rgba(0,0,0,0.8)] transition-all
+                  hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.8)]
                   ${isOvertime
                     ? 'bg-danger'
                     : 'bg-point'

@@ -71,7 +71,7 @@ export default function ResultCard({ record }: ResultCardProps) {
             : 'bg-point text-white'
           }`}
         >
-          {isGolden ? '⭐ 완벽한 타이밍' : isBurned ? '🔥 너무 오래 걸렸어요' : '💨 아슬아슬했어요'}
+          {isGolden ? '⭐ 완벽한 타이밍' : isBurned ? '🔥 너무 오래 걸렸어요' : record.deviationSeconds < 0 ? '⏱️ 일찍 끝냈어요' : '💨 조금 더 걸렸어요'}
         </span>
       </div>
     </motion.div>

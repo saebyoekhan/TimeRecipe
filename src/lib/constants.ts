@@ -11,7 +11,7 @@ export const GOLDEN_TIME_THRESHOLD = {
 
 export const BURN_TIMEOUT = 600; // 10분 (초) - 목표 초과 후 방치 시간
 
-export const LONG_PRESS_DURATION = 2000; // 2초 (ms)
+export const LONG_PRESS_DURATION = 1000; // 1초 (ms)
 
 export const MIN_DURATION = 1;   // 최소 1분
 export const MAX_DURATION = 120; // 최대 120분

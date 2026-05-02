@@ -22,23 +22,23 @@ export default function FoodProgress({ recipeDuration, recipeType, phase }: Food
 
   return (
     <div className="flex flex-col items-center relative">
-      {/* 픽셀 연기 효과 (조리 중에는 항상 표시) */}
-      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-full h-32 pointer-events-none flex justify-center gap-6">
+      {/* 픽셀 연기 효과 (조리 중에는 항상 표시) - 위치를 음식(팬) 영역 안으로 조정 */}
+      <div className="absolute inset-0 top-[-20px] pointer-events-none flex justify-center items-center gap-6 z-20">
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
-            className="w-4 h-4 bg-white/60 rounded-full blur-sm"
+            className="w-5 h-5 bg-white/70 rounded-sm"
             animate={{
-              y: [0, -40, -80],
-              x: [0, i % 2 === 0 ? 20 : -20, i % 2 === 0 ? 40 : -40],
-              opacity: [0, 0.6, 0],
-              scale: [1, 2, 3],
+              y: [0, -30, -60],
+              x: [0, i % 2 === 0 ? 15 : -15, i % 2 === 0 ? 30 : -30],
+              opacity: [0, 0.8, 0],
+              scale: [1, 1.5, 2],
             }}
             transition={{
-              duration: 2.5,
+              duration: 2,
               repeat: Infinity,
-              delay: i * 0.8,
-              ease: 'easeOut',
+              delay: i * 0.6,
+              ease: 'linear',
             }}
           />
         ))}
@@ -57,18 +57,6 @@ export default function FoodProgress({ recipeDuration, recipeType, phase }: Food
           <PixelFood food={recipeType} phase={phase} size={250} />
         </motion.div>
       </AnimatePresence>
-
-      {/* 상태 라벨 (레트로 게임 대화창 느낌) */}
-      <motion.div
-        key={phaseLabels[phase]}
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="px-5 py-2 bg-black/80 border-4 border-wood-dark shadow-[4px_4px_0px_rgba(0,0,0,0.6)] relative z-20"
-      >
-        <p className="text-base font-bold text-cream tracking-widest text-pixel-stroke">
-          {recipe.displayName} · {phaseLabels[phase]}
-        </p>
-      </motion.div>
     </div>
   );
 }

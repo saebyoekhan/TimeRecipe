@@ -31,6 +31,10 @@ export default function RootLayout({
       <head>
         <link
           rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm/style.css"
+        />
+        <link
+          rel="stylesheet"
           as="style"
           crossOrigin="anonymous"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
