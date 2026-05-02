@@ -13,29 +13,43 @@ interface PanPreviewProps {
 
 export default function PanPreview({ recipeType, onIgnite }: PanPreviewProps) {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* 음식 (배경의 프라이팬 정중앙에 위치) */}
-      <motion.div
-        className="absolute z-10 pointer-events-auto"
-        style={{ top: '48%', left: '50%', x: '-50%', y: '-50%' }}
-        initial={{ scale: 0, y: -50, opacity: 0 }}
-        animate={{ scale: 1, y: 0, opacity: 1 }}
-        exit={{ scale: 0, opacity: 0 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      >
-        <PixelFood food={recipeType} phase={1} size={160} />
-      </motion.div>
+    <motion.div
+      className="flex flex-col items-center gap-6 py-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+    >
+      {/* 후라이팬 + 음식 */}
+      <div className="relative">
+        {/* 팬 SVG */}
+        <svg width="200" height="170" viewBox="0 0 200 170" style={{ imageRendering: 'pixelated' }}>
+          {/* 팬 손잡이 */}
+          <rect x="155" y="70" width="42" height="14" rx="4" fill="#5D4037" />
+          <rect x="155" y="73" width="42" height="8" rx="3" fill="#6D4C41" />
+          {/* 팬 몸체 */}
+          <ellipse cx="88" cy="90" rx="78" ry="60" fill="#616161" />
+          <ellipse cx="88" cy="88" rx="74" ry="56" fill="#757575" />
+          {/* 팬 안쪽 */}
+          <ellipse cx="88" cy="85" rx="65" ry="48" fill="#424242" />
+          <ellipse cx="88" cy="83" rx="61" ry="44" fill="#333333" />
+          {/* 기름 반사 */}
+          <ellipse cx="78" cy="77" rx="22" ry="12" fill="#3E3E3E" opacity="0.5" />
+        </svg>
 
-      {/* 점화 버튼 (가스레인지 가운데 손잡이에 일치) */}
-      <motion.div 
-        className="absolute z-20 pointer-events-auto"
-        style={{ top: '74%', left: '50%', x: '-50%', y: '-50%' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <IgnitionButton onIgnite={onIgnite} />
-      </motion.div>
-    </div>
+        {/* 음식 (팬 위) */}
+        <motion.div
+          className="absolute top-1/2 left-[44%] -translate-x-1/2 -translate-y-[55%]"
+          initial={{ scale: 0, y: -30 }}
+          animate={{ scale: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 15, delay: 0.15 }}
+        >
+          <PixelFood food={recipeType} phase={1} size={100} />
+        </motion.div>
+      </div>
+
+      {/* 점화 버튼 */}
+      <IgnitionButton onIgnite={onIgnite} />
+    </motion.div>
   );
 }

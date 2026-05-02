@@ -67,7 +67,7 @@ export default function IgnitionButton({ onIgnite }: IgnitionButtonProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="absolute -bottom-10 whitespace-nowrap text-sm text-cream text-pixel-stroke font-bold tracking-widest pointer-events-none"
+        className="mt-3 whitespace-nowrap text-sm text-cream text-pixel-stroke font-bold tracking-widest"
       >
         {isPressing ? '🔥 점화 중...' : '👇 꾹 누르세요'}
       </motion.p>
