@@ -9,16 +9,17 @@ export default function RecipeCarousel() {
   const { recipeDuration, selectRecipe } = useRecipe();
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 scrollbar-hide">
       {RECIPE_LIST.map((recipe, i) => (
-        <RecipeCard
-          key={recipe.duration}
-          recipe={recipe}
-          index={i}
-          total={RECIPE_LIST.length}
-          isSelected={recipeDuration === recipe.duration}
-          onSelect={() => selectRecipe(recipe.duration as RecipeDuration)}
-        />
+        <div key={recipe.duration} className="shrink-0">
+          <RecipeCard
+            recipe={recipe}
+            index={i}
+            total={RECIPE_LIST.length}
+            isSelected={recipeDuration === recipe.duration}
+            onSelect={() => selectRecipe(recipe.duration as RecipeDuration)}
+          />
+        </div>
       ))}
     </div>
   );

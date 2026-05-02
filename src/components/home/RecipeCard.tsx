@@ -15,7 +15,6 @@ interface RecipeCardProps {
 export default function RecipeCard({
   recipe,
   index,
-  total,
   isSelected,
   onSelect,
 }: RecipeCardProps) {
@@ -23,36 +22,30 @@ export default function RecipeCard({
     <motion.div
       layoutId={`recipe-card-${recipe.food}`}
       className="cursor-pointer"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, x: 20 }}
       animate={{
         opacity: 1,
-        y: 0,
+        x: 0,
         scale: isSelected ? 1.05 : 1,
       }}
       transition={{
         type: 'spring',
         stiffness: 300,
         damping: 25,
-        delay: index * 0.06,
+        delay: index * 0.04,
       }}
       onClick={onSelect}
     >
       <div
-        className={`relative w-full p-3 flex flex-col items-center justify-between gap-2
-                    transition-all duration-200
-                    ${isSelected
-                      ? 'wood-card-active'
-                      : 'wood-card'
-                    }`}
+        className={`w-20 p-2 flex flex-col items-center gap-1.5 transition-all duration-200
+                    ${isSelected ? 'wood-card-active' : 'wood-card'}`}
       >
-        <div className="mt-1">
-          <PixelFood food={recipe.food} phase={3} size={40} />
-        </div>
+        <PixelFood food={recipe.food} phase={3} size={32} />
         <div className="text-center">
-          <p className={`text-xs font-bold ${isSelected ? 'text-white' : 'text-cream'}`}>
+          <p className={`text-[9px] font-bold leading-tight ${isSelected ? 'text-white' : 'text-cream'}`}>
             {recipe.displayName}
           </p>
-          <p className={`text-sm font-bold mt-0.5 ${isSelected ? 'text-yellow-300' : 'text-wood-light'}`}>
+          <p className={`text-xs font-bold ${isSelected ? 'text-yellow-300' : 'text-wood-light'}`}>
             {recipe.label}
           </p>
         </div>
