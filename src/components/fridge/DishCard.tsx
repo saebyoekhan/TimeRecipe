@@ -12,9 +12,9 @@ interface DishCardProps {
 
 const statusConfig = {
   golden:    { label: '⭐ Golden', color: 'bg-success text-white' },
-  done:      { label: '완료',      color: 'bg-point text-white' },
+  done:      { label: '✅ 완료',   color: 'bg-point text-white' },
   burned:    { label: '🔥 타버림', color: 'bg-danger text-white' },
-  abandoned: { label: '방치',      color: 'bg-brown-light/30 text-brown-light' },
+  abandoned: { label: '⏸️ 방치',  color: 'bg-wood-dark text-cream' },
 };
 
 export default function DishCard({ record, index }: DishCardProps) {
@@ -28,24 +28,24 @@ export default function DishCard({ record, index }: DishCardProps) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05, type: 'spring', stiffness: 300, damping: 25 }}
-      className="bg-[#FFF9C4] border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,0.6)] p-3 flex flex-col items-center gap-2 transform hover:-translate-y-1 hover:rotate-1 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.6)] transition-all cursor-default"
+      className="bg-black/70 border-2 border-wood-dark shadow-[4px_4px_0px_rgba(0,0,0,0.6)] p-3 flex flex-col items-center gap-2 hover:-translate-y-1 hover:border-point hover:shadow-[6px_6px_0px_rgba(0,0,0,0.6)] transition-all cursor-default"
     >
-      {/* 사진 영역처럼 보이게 안쪽 박스 */}
-      <div className="w-full bg-black/5 border-2 border-black/10 rounded-sm py-2 flex justify-center mb-1">
+      {/* 음식 아이콘 영역 */}
+      <div className="w-full bg-black/40 border-2 border-wood-dark/50 py-3 flex justify-center">
         <PixelFood
           food={record.recipeType}
           phase={record.status === 'burned' ? 1 : 3}
-          size={48}
+          size={64}
         />
       </div>
       
-      <p className="text-xs font-bold text-black tracking-widest truncate w-full text-center">
+      <p className="text-xs font-bold text-cream tracking-widest truncate w-full text-center">
         {record.taskName}
       </p>
       <span className={`text-[9px] px-2 py-0.5 border border-black font-bold shadow-[1px_1px_0px_rgba(0,0,0,1)] ${status.color}`}>
         {status.label}
       </span>
-      <p className="text-[10px] text-black/60 font-bold">{dateStr} · {recipe.label}</p>
+      <p className="text-[10px] text-cream/50 font-bold">{dateStr} · {recipe.label}</p>
     </motion.div>
   );
 }

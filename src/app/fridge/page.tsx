@@ -20,7 +20,7 @@ export default function FridgePage() {
 
   return (
     <main className="flex-1 flex flex-col relative pixel-bg">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0" />
+      <div className="absolute inset-0 bg-black/55 z-0" />
       <div className="flex-1 flex flex-col py-8 px-6 relative z-10">
       {/* 헤더 */}
       <div className="flex items-center justify-center mb-6">
