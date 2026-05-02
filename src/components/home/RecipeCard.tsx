@@ -19,21 +19,15 @@ export default function RecipeCard({
   isSelected,
   onSelect,
 }: RecipeCardProps) {
-  const centerIndex = (total - 1) / 2;
-  const offset = index - centerIndex;
-  const rotate = offset * 3;
-  const translateY = Math.abs(offset) * 3;
-
   return (
     <motion.div
       layoutId={`recipe-card-${recipe.food}`}
       className="cursor-pointer"
-      initial={{ opacity: 0, y: 30, rotate: 0 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: 1,
-        y: -translateY,
-        rotate,
-        scale: isSelected ? 1.08 : 1,
+        y: 0,
+        scale: isSelected ? 1.05 : 1,
       }}
       transition={{
         type: 'spring',
@@ -42,10 +36,9 @@ export default function RecipeCard({
         delay: index * 0.06,
       }}
       onClick={onSelect}
-      style={{ originX: 0.5, originY: 1 }}
     >
       <div
-        className={`relative w-24 h-32 p-3 flex flex-col items-center justify-between shrink-0
+        className={`relative w-full p-3 flex flex-col items-center justify-between gap-2
                     transition-all duration-200
                     ${isSelected
                       ? 'wood-card-active'
@@ -53,13 +46,15 @@ export default function RecipeCard({
                     }`}
       >
         <div className="mt-1">
-          <PixelFood food={recipe.food} phase={3} size={48} />
+          <PixelFood food={recipe.food} phase={3} size={40} />
         </div>
         <div className="text-center">
-          <p className={`text-[10px] font-medium ${isSelected ? 'text-white/70' : 'text-brown-light'}`}>
+          <p className={`text-xs font-bold ${isSelected ? 'text-white' : 'text-cream'}`}>
             {recipe.displayName}
           </p>
-          <p className="text-base font-bold">{recipe.label}</p>
+          <p className={`text-sm font-bold mt-0.5 ${isSelected ? 'text-yellow-300' : 'text-wood-light'}`}>
+            {recipe.label}
+          </p>
         </div>
       </div>
     </motion.div>

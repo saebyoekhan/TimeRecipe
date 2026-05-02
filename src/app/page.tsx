@@ -34,7 +34,7 @@ export default function HomePage() {
   return (
     <main className="flex-1 flex flex-col pixel-bg relative">
       {/* 반투명 패널 (상단 UI용) */}
-      <div className="absolute top-0 left-0 right-0 p-6 bg-black/40 backdrop-blur-sm z-10 rounded-b-2xl border-b-4 border-wood-dark">
+      <div className="absolute top-0 left-0 right-0 p-6 bg-black/50 z-10 border-b-4 border-wood-dark">
         {/* 헤더 */}
         <motion.div
           className="text-center mb-6"

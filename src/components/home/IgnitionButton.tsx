@@ -24,6 +24,22 @@ export default function IgnitionButton({ onIgnite }: IgnitionButtonProps) {
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         {...handlers}
       >
+        {/* 누르기 전: 깜빡이는 가이드 링 */}
+        {!isPressing && (
+          <motion.div
+            className="absolute inset-[-6px] rounded-full border-2 border-point/60 pointer-events-none"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.6, 0, 0.6],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        )}
+
         {/* 꾹 누르면 손잡이 주변에 붉은 빛이 퍼지는 효과 */}
         {isPressing && (
           <motion.div
@@ -37,29 +53,15 @@ export default function IgnitionButton({ onIgnite }: IgnitionButtonProps) {
             }}
           />
         )}
-
-        {/* 프로그레스 테두리 (사각형, 손잡이에 맞춤) */}
-        {isPressing && (
-          <svg className="absolute inset-[-6px] w-[calc(100%+12px)] h-[calc(100%+12px)] pointer-events-none" viewBox="0 0 100 100">
-            <rect
-              x="5" y="5" width="90" height="90" rx="8" ry="8"
-              fill="none"
-              stroke={`rgba(255, ${Math.round(200 - progress * 150)}, ${Math.round(100 - progress * 100)}, ${0.6 + progress * 0.4})`}
-              strokeWidth="4"
-              strokeDasharray={`${360 * progress} ${360 * (1 - progress)}`}
-              className="transition-all duration-75"
-            />
-          </svg>
-        )}
       </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="absolute -bottom-8 whitespace-nowrap text-xs text-cream text-pixel-stroke font-medium tracking-widest pointer-events-none"
+        className="absolute -bottom-10 whitespace-nowrap text-sm text-cream text-pixel-stroke font-bold tracking-widest pointer-events-none"
       >
-        {isPressing ? '점화 중...' : '꾹 누르세요'}
+        {isPressing ? '🔥 점화 중...' : '👇 꾹 누르세요'}
       </motion.p>
     </div>
   );

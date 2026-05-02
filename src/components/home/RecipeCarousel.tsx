@@ -9,7 +9,7 @@ export default function RecipeCarousel() {
   const { recipeDuration, selectRecipe } = useRecipe();
 
   return (
-    <div className="flex items-end justify-start gap-3 pt-4 pb-4 px-4 overflow-x-auto">
+    <div className="grid grid-cols-3 gap-2">
       {RECIPE_LIST.map((recipe, i) => (
         <RecipeCard
           key={recipe.duration}

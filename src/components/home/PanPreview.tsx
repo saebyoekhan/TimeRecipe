@@ -23,7 +23,7 @@ export default function PanPreview({ recipeType, onIgnite }: PanPreviewProps) {
         exit={{ scale: 0, opacity: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       >
-        <PixelFood food={recipeType} phase={1} size={100} />
+        <PixelFood food={recipeType} phase={1} size={160} />
       </motion.div>
 
       {/* 점화 버튼 (가스레인지 가운데 손잡이에 일치) */}
