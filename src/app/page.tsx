@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRecipe } from '@/contexts/RecipeContext';
@@ -9,8 +10,10 @@ import TaskInput from '@/components/home/TaskInput';
 import RecipeCarousel from '@/components/home/RecipeCarousel';
 import PanPreview from '@/components/home/PanPreview';
 import BottomDock from '@/components/shared/BottomDock';
+import IntroModal from '@/components/shared/IntroModal';
 
 export default function HomePage() {
+  const [showIntro, setShowIntro] = useState(false);
   const router = useRouter();
   const { taskName, recipeDuration, recipeType } = useRecipe();
   const showRecipes = taskName.trim().length > 0;
@@ -43,6 +46,14 @@ export default function HomePage() {
         >
           <h1 className="text-3xl font-bold text-cream tracking-widest text-pixel-stroke">타임레시피</h1>
           <p className="mt-2 text-sm text-wood-light text-pixel-stroke">시간을 요리하세요</p>
+          <button
+            onClick={() => setShowIntro(true)}
+            className="mt-3 text-xs px-3 py-1.5 bg-wood-dark/80 text-cream/80 font-bold tracking-widest
+                       border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,0.6)]
+                       hover:bg-wood hover:text-cream transition-colors"
+          >
+            ❓ 이게 뭐야?
+          </button>
         </motion.div>
 
         {/* 주문서 입력 */}
@@ -79,6 +90,11 @@ export default function HomePage() {
       <div className="z-20 mt-auto">
         <BottomDock />
       </div>
+
+      {/* 소개 모달 */}
+      <AnimatePresence>
+        {showIntro && <IntroModal onClose={() => setShowIntro(false)} />}
+      </AnimatePresence>
     </main>
   );
 }
