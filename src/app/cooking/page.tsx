@@ -87,37 +87,54 @@ export default function CookingPage() {
   };
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-between py-16 px-6 relative overflow-hidden">
-      {/* 인덕션 화구 배경 */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 relative overflow-hidden counter-bg">
+      {/* 가스 화구 배경 */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: '-5%' }}>
+        {/* 화구 외곽 */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="w-64 h-64 rounded-full border-2 border-neutral/5"
+          animate={{ scale: 1, opacity: 0.15 }}
+          transition={{ duration: 0.6 }}
+          className="w-72 h-72 rounded-full border-[6px] border-counter-edge"
         />
+        {/* 화구 내부 링 */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
-          className="absolute w-48 h-48 rounded-full border border-neutral/5"
+          animate={{ scale: 1, opacity: 0.12 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="absolute w-56 h-56 rounded-full border-4 border-counter-edge"
         />
+        {/* 화구 십자 격자 */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.08 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute w-60 h-60 flex items-center justify-center"
+        >
+          <div className="absolute w-full h-1 bg-counter-edge rounded-full" />
+          <div className="absolute w-1 h-full bg-counter-edge rounded-full" />
+          <div className="absolute w-full h-1 bg-counter-edge rounded-full rotate-45" />
+          <div className="absolute w-1 h-full bg-counter-edge rounded-full rotate-45" />
+        </motion.div>
+        {/* 중앙 원 */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="absolute w-32 h-32 rounded-full border border-neutral/[0.03]"
+          animate={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="absolute w-20 h-20 rounded-full bg-counter-edge"
         />
       </div>
 
       {/* 할일 이름 */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="text-sm text-neutral/40 text-center z-10"
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="z-10 wood-card px-5 py-2"
       >
-        {session.taskName}
-      </motion.p>
+        <p className="text-sm font-medium text-brown text-center">
+          {session.taskName}
+        </p>
+      </motion.div>
 
       {/* 음식 프로그레스 */}
       <motion.div
@@ -134,7 +151,7 @@ export default function CookingPage() {
       </motion.div>
 
       {/* 하단: 타이머 + 정지 버튼 */}
-      <div className="flex flex-col items-center gap-6 z-10">
+      <div className="flex flex-col items-center gap-5 z-10">
         <TimerDisplay
           elapsedSeconds={timer.elapsedSeconds}
           targetSeconds={session.targetSeconds}

@@ -18,7 +18,7 @@ export default function FailReasonInput({ onSave }: FailReasonInputProps) {
       transition={{ delay: 0.5 }}
       className="w-full max-w-sm mx-auto flex flex-col gap-3"
     >
-      <p className="text-xs text-neutral/40 text-center">어떤 일이 있었나요?</p>
+      <p className="text-xs text-brown-light/60 text-center font-medium">어떤 일이 있었나요?</p>
 
       {/* 자주 찾는 사유 */}
       <div className="flex flex-wrap justify-center gap-2">
@@ -29,8 +29,8 @@ export default function FailReasonInput({ onSave }: FailReasonInputProps) {
               setReason(r);
               onSave(r);
             }}
-            className="text-xs px-3 py-1.5 rounded-full bg-neutral/5 text-neutral/60
-                       hover:bg-point/10 hover:text-point transition-colors"
+            className="text-xs px-3 py-1.5 rounded-lg bg-wood/15 text-brown-light font-medium
+                       hover:bg-point/20 hover:text-point-dark transition-colors"
           >
             {r}
           </button>
@@ -44,14 +44,14 @@ export default function FailReasonInput({ onSave }: FailReasonInputProps) {
           value={reason}
           onChange={(e) => setReason(e.target.value)}
           placeholder="직접 입력..."
-          className="flex-1 px-3 py-2 text-sm bg-white rounded-xl border border-neutral/10
-                     focus:outline-none focus:border-point/40 transition-colors"
+          className="flex-1 px-3 py-2 text-sm bg-cream rounded-lg border-2 border-wood/20
+                     text-brown focus:outline-none focus:border-point/50 transition-colors"
         />
         <button
           onClick={() => reason.trim() && onSave(reason.trim())}
           disabled={!reason.trim()}
-          className="px-4 py-2 text-sm rounded-xl bg-point text-white
-                     disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
+          className="px-4 py-2 text-sm rounded-lg bg-point text-white font-bold
+                     disabled:opacity-30 disabled:cursor-not-allowed transition-opacity pixel-shadow"
         >
           저장
         </button>

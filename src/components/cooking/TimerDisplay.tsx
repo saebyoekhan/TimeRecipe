@@ -24,22 +24,24 @@ export default function TimerDisplay({ elapsedSeconds, targetSeconds, isOvertime
       {/* 토글 버튼 */}
       <button
         onClick={() => setVisible(!visible)}
-        className="text-xs px-4 py-1.5 rounded-full bg-neutral/5 text-neutral/40
-                   hover:bg-neutral/10 transition-colors"
+        className="text-xs px-4 py-1.5 rounded-lg bg-wood/20 text-brown-light font-medium
+                   hover:bg-wood/30 transition-colors pixel-shadow"
       >
-        {visible ? '시간 숨기기' : '시간 보기'}
+        {visible ? '⏱️ 시간 숨기기' : '⏱️ 시간 보기'}
       </button>
 
-      {/* 타이머 숫자 */}
+      {/* 타이머 숫자 (나무 프레임) */}
       <motion.div
         animate={{
           opacity: visible ? 1 : 0,
           filter: visible ? 'blur(0px)' : 'blur(8px)',
         }}
         transition={{ duration: 0.4 }}
-        className="font-mono text-4xl font-light tracking-wider"
+        className="wood-card px-6 py-2"
       >
-        <span className={isOvertime ? 'text-red-400' : 'text-neutral/70'}>
+        <span className={`font-mono text-3xl font-bold tracking-wider
+          ${isOvertime ? 'text-danger' : 'text-brown'}`}
+        >
           {isOvertime ? '+' : ''}{formatTime(isOvertime ? elapsedSeconds - targetSeconds : remaining)}
         </span>
       </motion.div>

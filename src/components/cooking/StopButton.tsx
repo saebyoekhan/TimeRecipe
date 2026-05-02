@@ -12,14 +12,13 @@ export default function StopButton({ onStop, isOvertime }: StopButtonProps) {
     <motion.button
       onClick={onStop}
       whileTap={{ scale: 0.95 }}
-      className={`px-8 py-3 rounded-full text-white font-medium text-base
-                  shadow-lg transition-colors
+      className={`px-8 py-3 rounded-xl text-white font-bold text-base pixel-shadow
                   ${isOvertime
-                    ? 'bg-red-400 shadow-red-400/30'
-                    : 'bg-point shadow-point/30'
+                    ? 'bg-danger'
+                    : 'bg-point'
                   }`}
     >
-      {isOvertime ? '꺼내기' : '완성'}
+      {isOvertime ? '🔥 꺼내기' : '🍽️ 완성'}
     </motion.button>
   );
 }

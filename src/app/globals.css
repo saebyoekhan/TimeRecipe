@@ -1,15 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --color-base: #F9F8F6;
-  --color-point: #FF6B35;
-  --color-neutral: #2D2D2D;
+  /* 따뜻한 주방 컬러 팔레트 */
+  --color-base: #FFF3E0;
+  --color-cream: #FFF8ED;
+  --color-wood: #D4A574;
+  --color-wood-dark: #8B6914;
+  --color-wood-light: #E8CBA7;
+  --color-brown: #5C3A1E;
+  --color-brown-light: #8B6543;
+  --color-point: #E8943A;
+  --color-point-dark: #C67A2E;
+  --color-neutral: #3E2723;
+  --color-success: #6B9B37;
+  --color-danger: #C0392B;
+  --color-counter: #F0D9B5;
+  --color-counter-edge: #C4956A;
 }
 
 @theme inline {
   --color-base: var(--color-base);
+  --color-cream: var(--color-cream);
+  --color-wood: var(--color-wood);
+  --color-wood-dark: var(--color-wood-dark);
+  --color-wood-light: var(--color-wood-light);
+  --color-brown: var(--color-brown);
+  --color-brown-light: var(--color-brown-light);
   --color-point: var(--color-point);
+  --color-point-dark: var(--color-point-dark);
   --color-neutral: var(--color-neutral);
+  --color-success: var(--color-success);
+  --color-danger: var(--color-danger);
+  --color-counter: var(--color-counter);
+  --color-counter-edge: var(--color-counter-edge);
 }
 
 body {
@@ -20,7 +43,74 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 스크롤바 숨김 (모바일 감성) */
+/* 나무결 배경 패턴 */
+.wood-bg {
+  background-color: #F5E1C0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(139, 105, 20, 0.03) 40px,
+      rgba(139, 105, 20, 0.03) 41px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 8px,
+      rgba(139, 105, 20, 0.02) 8px,
+      rgba(139, 105, 20, 0.02) 9px
+    );
+}
+
+/* 조리대 배경 */
+.counter-bg {
+  background: linear-gradient(
+    180deg,
+    #F5E1C0 0%,
+    #F0D9B5 40%,
+    #C4956A 40.5%,
+    #D4A574 41%,
+    #E8CBA7 42%,
+    #DFC19D 100%
+  );
+}
+
+/* 가스 화구 스타일 */
+.burner-grate {
+  background: radial-gradient(circle, transparent 30%, #9E9E9E 31%, #BDBDBD 35%, transparent 36%),
+    radial-gradient(circle, transparent 60%, #9E9E9E 61%, #BDBDBD 65%, transparent 66%);
+}
+
+/* 픽셀아트 느낌의 그림자 */
+.pixel-shadow {
+  box-shadow:
+    2px 2px 0px rgba(92, 58, 30, 0.2),
+    4px 4px 0px rgba(92, 58, 30, 0.1);
+}
+
+/* 나무 프레임 카드 */
+.wood-card {
+  background: var(--color-cream);
+  border: 3px solid var(--color-wood);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    2px 3px 0px var(--color-counter-edge),
+    0 4px 8px rgba(92, 58, 30, 0.15);
+}
+
+/* 선택된 카드 (포인트 컬러) */
+.wood-card-active {
+  background: linear-gradient(135deg, #E8943A, #C67A2E);
+  border: 3px solid #A0651F;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    2px 3px 0px #8B5A1B,
+    0 4px 12px rgba(232, 148, 58, 0.4);
+}
+
+/* 스크롤바 숨김 */
 ::-webkit-scrollbar {
   display: none;
 }

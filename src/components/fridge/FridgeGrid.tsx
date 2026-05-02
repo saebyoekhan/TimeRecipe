@@ -17,8 +17,8 @@ export default function FridgeGrid({ records }: FridgeGridProps) {
         className="flex-1 flex flex-col items-center justify-center text-center"
       >
         <span className="text-5xl mb-4">🧊</span>
-        <p className="text-sm text-neutral/40">냉장고가 비어있어요</p>
-        <p className="text-xs text-neutral/25 mt-1">요리를 시작해 보세요!</p>
+        <p className="text-sm text-brown-light/50 font-medium">냉장고가 비어있어요</p>
+        <p className="text-xs text-brown-light/30 mt-1">요리를 시작해 보세요!</p>
       </motion.div>
     );
   }

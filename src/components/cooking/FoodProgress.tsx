@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { RECIPES } from '@/lib/recipes';
 import { RecipeDuration } from '@/lib/types';
+import PixelFood from '@/components/shared/PixelFood';
 
 interface FoodProgressProps {
   recipeDuration: RecipeDuration;
@@ -11,23 +12,13 @@ interface FoodProgressProps {
 }
 
 const phaseLabels = {
-  1: '조리 시작',
+  1: '재료 준비',
   2: '익는 중...',
-  3: '완성!',
-};
-
-const phaseEmojis: Record<string, Record<1 | 2 | 3, string>> = {
-  egg:     { 1: '🥚', 2: '🍳', 3: '🍳' },
-  toast:   { 1: '🍞', 2: '🍞', 3: '🥪' },
-  pancake: { 1: '🥣', 2: '🥞', 3: '🥞' },
-  pasta:   { 1: '🍝', 2: '🍝', 3: '🍝' },
-  stew:    { 1: '🥘', 2: '🍲', 3: '🍲' },
-  roast:   { 1: '🥩', 2: '🍖', 3: '🍖' },
+  3: '바로완성!',
 };
 
 export default function FoodProgress({ recipeDuration, recipeType, phase }: FoodProgressProps) {
   const recipe = RECIPES[recipeDuration];
-  const emoji = phaseEmojis[recipeType]?.[phase] ?? recipe.emoji;
 
   return (
     <div className="flex flex-col items-center">
@@ -38,19 +29,23 @@ export default function FoodProgress({ recipeDuration, recipeType, phase }: Food
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          className="text-8xl mb-4"
+          className="mb-4"
         >
-          {emoji}
+          <PixelFood food={recipeType} phase={phase} size={120} />
         </motion.div>
       </AnimatePresence>
-      <motion.p
+
+      {/* 상태 라벨 (나무 프레임) */}
+      <motion.div
         key={phaseLabels[phase]}
         initial={{ opacity: 0, y: 5 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-sm text-neutral/50"
+        className="px-4 py-1.5 bg-point rounded-lg pixel-shadow"
       >
-        {recipe.displayName} · {phaseLabels[phase]}
-      </motion.p>
+        <p className="text-sm font-bold text-white">
+          {recipe.displayName} · {phaseLabels[phase]}
+        </p>
+      </motion.div>
     </div>
   );
 }

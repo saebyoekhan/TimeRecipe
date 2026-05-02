@@ -60,7 +60,7 @@ function ResultContent() {
   const needsReason = !isGolden && !reasonSaved;
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-between py-12 px-6">
+    <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 wood-bg">
       {/* 축하 or 결과 */}
       <div className="flex-1 flex flex-col items-center justify-center gap-8 w-full">
         {isGolden && <GoldenTimeBadge />}
@@ -77,16 +77,15 @@ function ResultContent() {
       >
         <button
           onClick={() => router.push('/')}
-          className="px-6 py-2.5 rounded-full bg-point text-white text-sm font-medium
-                     shadow-md shadow-point/20"
+          className="px-6 py-2.5 rounded-xl bg-point text-white text-sm font-bold pixel-shadow"
         >
-          다시 요리하기
+          🍳 다시 요리하기
         </button>
         <button
           onClick={() => router.push('/fridge')}
-          className="px-6 py-2.5 rounded-full bg-neutral/5 text-neutral/60 text-sm font-medium"
+          className="px-6 py-2.5 rounded-xl bg-wood/20 text-brown-light text-sm font-bold pixel-shadow"
         >
-          냉장고 열기
+          🧊 냉장고 열기
         </button>
       </motion.div>
     </main>

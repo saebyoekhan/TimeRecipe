@@ -10,7 +10,7 @@ export default function HomePage() {
   const showRecipes = taskName.trim().length > 0;
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-center px-6 py-12 overflow-hidden">
+    <main className="flex-1 flex flex-col items-center justify-center px-6 py-12 overflow-hidden wood-bg">
       {/* 헤더 */}
       <motion.div
         className="text-center mb-10"
@@ -18,8 +18,8 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-2xl font-bold text-neutral tracking-tight">타임레시피</h1>
-        <p className="mt-1 text-sm text-neutral/40">시간을 요리하세요</p>
+        <h1 className="text-2xl font-bold text-brown tracking-tight">🍳 타임레시피</h1>
+        <p className="mt-1 text-sm text-brown-light/60">시간을 요리하세요</p>
       </motion.div>
 
       {/* 주문서 입력 */}
@@ -42,8 +42,8 @@ export default function HomePage() {
             exit={{ opacity: 0, y: 20 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
-            <p className="text-xs text-center text-neutral/40 mb-4">
-              레시피를 선택하세요
+            <p className="text-xs text-center text-brown-light/60 mb-4">
+              🍽️ 레시피를 선택하세요
             </p>
             <RecipeCarousel />
           </motion.div>

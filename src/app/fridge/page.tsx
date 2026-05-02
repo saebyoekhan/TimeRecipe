@@ -18,16 +18,16 @@ export default function FridgePage() {
   const goldenCount = records.filter((r) => r.status === 'golden').length;
 
   return (
-    <main className="flex-1 flex flex-col py-8 px-6">
+    <main className="flex-1 flex flex-col py-8 px-6 wood-bg">
       {/* 헤더 */}
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={() => router.push('/')}
-          className="text-sm text-neutral/40 hover:text-neutral transition-colors"
+          className="text-sm text-brown-light/60 hover:text-brown font-medium transition-colors"
         >
           ← 돌아가기
         </button>
-        <h1 className="text-lg font-bold text-neutral">냉장고</h1>
+        <h1 className="text-lg font-bold text-brown">🧊 냉장고</h1>
         <div className="w-16" />
       </div>
 
@@ -36,21 +36,21 @@ export default function FridgePage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex justify-center gap-6 mb-6 text-center"
+          className="wood-card flex justify-center gap-8 p-4 mb-6 text-center"
         >
           <div>
-            <p className="text-xl font-bold text-neutral">{records.length}</p>
-            <p className="text-[10px] text-neutral/40">전체 요리</p>
+            <p className="text-xl font-bold text-brown">{records.length}</p>
+            <p className="text-[10px] text-brown-light/50 font-medium">전체 요리</p>
           </div>
           <div>
-            <p className="text-xl font-bold text-green-500">{goldenCount}</p>
-            <p className="text-[10px] text-neutral/40">Golden Time</p>
+            <p className="text-xl font-bold text-success">{goldenCount}</p>
+            <p className="text-[10px] text-brown-light/50 font-medium">⭐ Golden</p>
           </div>
           <div>
             <p className="text-xl font-bold text-point">
               {records.length > 0 ? Math.round((goldenCount / records.length) * 100) : 0}%
             </p>
-            <p className="text-[10px] text-neutral/40">성공률</p>
+            <p className="text-[10px] text-brown-light/50 font-medium">성공률</p>
           </div>
         </motion.div>
       )}
