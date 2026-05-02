@@ -19,8 +19,8 @@ export default function FridgePage() {
   const goldenCount = records.filter((r) => r.status === 'golden').length;
 
   return (
-    <main className="flex-1 flex flex-col relative pixel-bg">
-      <div className="absolute inset-0 bg-black/55 z-0" />
+    <main className="flex-1 flex flex-col relative fridge-bg">
+      <div className="absolute inset-0 bg-black/40 z-0" />
       <div className="flex-1 flex flex-col py-8 px-6 relative z-10">
       {/* 헤더 */}
       <div className="flex items-center justify-center mb-6">
