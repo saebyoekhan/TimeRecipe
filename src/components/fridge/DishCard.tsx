@@ -28,14 +28,34 @@ const cardStyles = {
     hoverBorder: 'hover:border-yellow-400',
     gapColor: 'text-yellow-300',
     statusIcon: '⭐',
+    dim: false,
   },
-  done: {
-    border: 'border-wood-dark',
-    bg: 'bg-black/70',
-    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6)]',
-    hoverBorder: 'hover:border-point',
-    gapColor: 'text-point',
+  good: {
+    border: 'border-green-700/80',
+    bg: 'bg-green-950/40',
+    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6),inset_0_0_15px_rgba(0,180,80,0.06)]',
+    hoverBorder: 'hover:border-green-500',
+    gapColor: 'text-green-400',
     statusIcon: '✅',
+    dim: false,
+  },
+  overcooked: {
+    border: 'border-orange-800/80',
+    bg: 'bg-orange-950/40',
+    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6),inset_0_0_15px_rgba(200,100,0,0.06)]',
+    hoverBorder: 'hover:border-orange-500',
+    gapColor: 'text-orange-400',
+    statusIcon: '⏰',
+    dim: false,
+  },
+  undercooked: {
+    border: 'border-blue-800/80',
+    bg: 'bg-blue-950/40',
+    glow: 'shadow-[3px_3px_0px_rgba(0,0,0,0.6),inset_0_0_15px_rgba(50,100,200,0.06)]',
+    hoverBorder: 'hover:border-blue-500',
+    gapColor: 'text-blue-400',
+    statusIcon: '⚡',
+    dim: false,
   },
   burned: {
     border: 'border-red-800/80',
@@ -44,6 +64,7 @@ const cardStyles = {
     hoverBorder: 'hover:border-red-500',
     gapColor: 'text-red-400',
     statusIcon: '🔥',
+    dim: true,
   },
   abandoned: {
     border: 'border-gray-600/50',
@@ -52,6 +73,7 @@ const cardStyles = {
     hoverBorder: 'hover:border-gray-400',
     gapColor: 'text-gray-400',
     statusIcon: '⏸️',
+    dim: true,
   },
 };
 
@@ -59,7 +81,6 @@ export default function DishCard({ record, index }: DishCardProps) {
   const recipe = RECIPES[record.recipeDuration];
   const style = cardStyles[record.status];
   const isGolden = record.status === 'golden';
-  const isBurned = record.status === 'burned' || record.status === 'abandoned';
   const isAbandoned = record.status === 'abandoned';
 
   return (
@@ -87,11 +108,11 @@ export default function DishCard({ record, index }: DishCardProps) {
         </div>
       )}
 
-      {/* 음식 아이콘 (배경 박스 제거, 크기 키움) */}
-      <div className={`py-1 ${isBurned ? 'opacity-50 grayscale-[30%]' : ''}`}>
+      {/* 음식 아이콘 */}
+      <div className={`py-1 ${style.dim ? 'opacity-50 grayscale-[30%]' : ''}`}>
         <PixelFood
           food={record.recipeType}
-          phase={isBurned ? 1 : 3}
+          phase={style.dim ? 1 : 3}
           size={72}
         />
       </div>

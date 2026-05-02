@@ -56,8 +56,8 @@ function ResultContent() {
 
   if (!record) return null;
 
-  const isGolden = record.status === 'golden';
-  const needsReason = !isGolden && !reasonSaved;
+  const isSuccess = record.status === 'golden' || record.status === 'good';
+  const needsReason = !isSuccess && !reasonSaved;
 
   return (
     <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 relative pixel-bg">
@@ -65,7 +65,7 @@ function ResultContent() {
       
       {/* 축하 or 결과 */}
       <div className="z-10 flex-1 flex flex-col items-center justify-center gap-8 w-full">
-        {isGolden && <GoldenTimeBadge />}
+        {record.status === 'golden' && <GoldenTimeBadge />}
         <ResultCard record={record} />
         {needsReason && <FailReasonInput onSave={handleSaveReason} />}
       </div>

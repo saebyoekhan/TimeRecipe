@@ -9,6 +9,11 @@ export const GOLDEN_TIME_THRESHOLD = {
   short: 60,    // ±1분 (5분 레시피용)
 } as const;
 
+export const GOOD_TIME_THRESHOLD = {
+  default: 300, // ±5분 (초)
+  short: 120,   // ±2분 (5분 레시피용)
+} as const;
+
 export const BURN_TIMEOUT = 600; // 10분 (초) - 목표 초과 후 방치 시간
 
 export const LONG_PRESS_DURATION = 1000; // 1초 (ms)

@@ -7,7 +7,7 @@ import { useTimer } from '@/hooks/useTimer';
 import { useWakeLock } from '@/hooks/useWakeLock';
 import { getActiveSession, clearActiveSession, addRecord } from '@/lib/storage';
 import { ActiveSession, CookingRecord, RecipeDuration } from '@/lib/types';
-import { GOLDEN_TIME_THRESHOLD } from '@/lib/constants';
+import { GOLDEN_TIME_THRESHOLD, GOOD_TIME_THRESHOLD } from '@/lib/constants';
 import FoodProgress from '@/components/cooking/FoodProgress';
 import TimerDisplay from '@/components/cooking/TimerDisplay';
 import StopButton from '@/components/cooking/StopButton';
@@ -62,11 +62,15 @@ export default function CookingPage() {
     const now = new Date().toISOString();
     const actualSeconds = timer.elapsedSeconds;
     const deviation = actualSeconds - session.targetSeconds;
-    const threshold = session.recipeDuration === 5
-      ? GOLDEN_TIME_THRESHOLD.short
-      : GOLDEN_TIME_THRESHOLD.default;
+    const isShort = session.recipeDuration === 5;
+    const goldenThreshold = isShort ? GOLDEN_TIME_THRESHOLD.short : GOLDEN_TIME_THRESHOLD.default;
+    const goodThreshold = isShort ? GOOD_TIME_THRESHOLD.short : GOOD_TIME_THRESHOLD.default;
+    const absDev = Math.abs(deviation);
 
-    const status = Math.abs(deviation) <= threshold ? 'golden' : 'done';
+    const status = absDev <= goldenThreshold ? 'golden'
+      : absDev <= goodThreshold ? 'good'
+      : deviation > 0 ? 'overcooked'
+      : 'undercooked';
 
     const record: CookingRecord = {
       id: crypto.randomUUID(),

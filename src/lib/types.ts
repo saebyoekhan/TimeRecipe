@@ -1,6 +1,6 @@
 export type RecipeDuration = 5 | 10 | 15 | 30 | 60 | 120;
 
-export type CookingStatus = 'golden' | 'done' | 'burned' | 'abandoned';
+export type CookingStatus = 'golden' | 'good' | 'overcooked' | 'undercooked' | 'burned' | 'abandoned';
 
 export interface CookingRecord {
   id: string;

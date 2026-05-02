@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CookingRecord } from '@/lib/types';
+import { CookingRecord, CookingStatus } from '@/lib/types';
 import { RECIPES } from '@/lib/recipes';
 import PixelFood from '@/components/shared/PixelFood';
 
@@ -15,7 +15,18 @@ function formatTime(seconds: number): string {
   return `${m}분 ${s}초`;
 }
 
-const cardConfig = {
+const cardConfig: Record<CookingStatus, {
+  title: string;
+  titleColor: string;
+  border: string;
+  bg: string;
+  glow: string;
+  divider: string;
+  diffColor: string;
+  badgeClass: string;
+  badgeText: string;
+  foodDim: boolean;
+}> = {
   golden: {
     title: '⭐ PERFECT CLEAR! ⭐',
     titleColor: 'text-yellow-300',
@@ -26,17 +37,43 @@ const cardConfig = {
     diffColor: 'text-yellow-300',
     badgeClass: 'bg-yellow-600 text-white',
     badgeText: '⭐ 완벽한 타이밍!',
+    foodDim: false,
   },
-  done: {
-    title: 'STAGE COMPLETE',
-    titleColor: 'text-wood-light',
-    border: 'border-wood-dark',
-    bg: 'bg-black/90',
-    glow: 'shadow-[8px_8px_0px_rgba(0,0,0,0.8)]',
-    divider: 'border-wood-dark',
-    diffColor: 'text-point',
-    badgeClass: 'bg-point text-white',
-    badgeText: '',
+  good: {
+    title: '✅ CLEAR!',
+    titleColor: 'text-green-400',
+    border: 'border-green-700',
+    bg: 'bg-gradient-to-b from-green-950/80 to-black/90',
+    glow: 'shadow-[8px_8px_0px_rgba(0,0,0,0.8),0_0_20px_rgba(0,180,80,0.08)]',
+    divider: 'border-green-800/50',
+    diffColor: 'text-green-400',
+    badgeClass: 'bg-success text-white',
+    badgeText: '👍 나쁘지 않아요!',
+    foodDim: false,
+  },
+  overcooked: {
+    title: '⏰ TOO SLOW...',
+    titleColor: 'text-orange-400',
+    border: 'border-orange-800',
+    bg: 'bg-gradient-to-b from-orange-950/80 to-black/90',
+    glow: 'shadow-[8px_8px_0px_rgba(0,0,0,0.8),0_0_20px_rgba(200,100,0,0.1)]',
+    divider: 'border-orange-900/50',
+    diffColor: 'text-orange-400',
+    badgeClass: 'bg-orange-600 text-white',
+    badgeText: '⏰ 예상보다 오래 걸렸어요',
+    foodDim: false,
+  },
+  undercooked: {
+    title: '⚡ TOO FAST...',
+    titleColor: 'text-blue-400',
+    border: 'border-blue-800',
+    bg: 'bg-gradient-to-b from-blue-950/80 to-black/90',
+    glow: 'shadow-[8px_8px_0px_rgba(0,0,0,0.8),0_0_20px_rgba(50,100,200,0.1)]',
+    divider: 'border-blue-900/50',
+    diffColor: 'text-blue-400',
+    badgeClass: 'bg-blue-600 text-white',
+    badgeText: '⚡ 예상보다 빨리 끝났어요',
+    foodDim: false,
   },
   burned: {
     title: '🔥 BURNED... 🔥',
@@ -47,7 +84,8 @@ const cardConfig = {
     divider: 'border-red-900/50',
     diffColor: 'text-red-400',
     badgeClass: 'bg-danger text-white',
-    badgeText: '🔥 너무 오래 걸렸어요',
+    badgeText: '🔥 타버렸어요...',
+    foodDim: true,
   },
   abandoned: {
     title: '⏸️ ABANDONED',
@@ -59,20 +97,15 @@ const cardConfig = {
     diffColor: 'text-gray-400',
     badgeClass: 'bg-gray-600 text-gray-200',
     badgeText: '⏸️ 방치됨',
+    foodDim: true,
   },
 };
 
 export default function ResultCard({ record }: ResultCardProps) {
   const recipe = RECIPES[record.recipeDuration];
   const isGolden = record.status === 'golden';
-  const isBurned = record.status === 'burned' || record.status === 'abandoned';
   const config = cardConfig[record.status];
   const deviationSign = record.deviationSeconds > 0 ? '+' : record.deviationSeconds < 0 ? '-' : '';
-
-  // done 상태 뱃지 텍스트 동적 결정
-  const badgeText = config.badgeText || (
-    record.deviationSeconds < 0 ? '⏱️ 일찍 끝냈어요' : '💨 조금 더 걸렸어요'
-  );
 
   return (
     <motion.div
@@ -111,9 +144,9 @@ export default function ResultCard({ record }: ResultCardProps) {
       </div>
 
       {/* 음식 아이콘 + 이름 */}
-      <div className={`text-center mb-6 ${isBurned ? 'opacity-60' : ''}`}>
+      <div className={`text-center mb-6 ${config.foodDim ? 'opacity-50 grayscale-[30%]' : ''}`}>
         <div className="flex justify-center mb-3">
-          <PixelFood food={record.recipeType} phase={isBurned ? 1 : 3} size={80} />
+          <PixelFood food={record.recipeType} phase={config.foodDim ? 1 : 3} size={80} />
         </div>
         <p className="text-lg font-bold text-cream tracking-widest">{recipe.displayName}</p>
         <p className="text-sm text-wood-light mt-1">&quot;{record.taskName}&quot;</p>
@@ -140,7 +173,7 @@ export default function ResultCard({ record }: ResultCardProps) {
       {/* 상태 메세지 */}
       <div className="text-center mt-6">
         <span className={`inline-block px-4 py-2 text-sm font-bold border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,0.8)] ${config.badgeClass}`}>
-          {badgeText}
+          {config.badgeText}
         </span>
       </div>
     </motion.div>
