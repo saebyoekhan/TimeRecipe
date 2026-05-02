@@ -45,11 +45,11 @@ export default function RecipeCard({
       style={{ originX: 0.5, originY: 1 }}
     >
       <div
-        className={`relative w-24 h-32 rounded-xl p-3 flex flex-col items-center justify-between shrink-0
+        className={`relative w-24 h-32 p-3 flex flex-col items-center justify-between shrink-0
                     transition-all duration-200
                     ${isSelected
-                      ? 'wood-card-active text-white'
-                      : 'wood-card text-neutral'
+                      ? 'wood-card-active'
+                      : 'wood-card'
                     }`}
       >
         <div className="mt-1">

@@ -32,26 +32,21 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex-1 flex flex-col wood-bg">
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 overflow-hidden">
+    <main className="flex-1 flex flex-col pixel-bg relative">
+      {/* 반투명 패널 (상단 UI용) */}
+      <div className="absolute top-0 left-0 right-0 p-6 bg-black/40 backdrop-blur-sm z-10 rounded-b-2xl border-b-4 border-wood-dark">
         {/* 헤더 */}
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-6"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
         >
-          <h1 className="text-2xl font-bold text-brown tracking-tight">🍳 타임레시피</h1>
-          <p className="mt-1 text-sm text-brown-light/60">시간을 요리하세요</p>
+          <h1 className="text-3xl font-bold text-cream tracking-widest text-pixel-stroke">타임레시피</h1>
+          <p className="mt-2 text-sm text-wood-light text-pixel-stroke">시간을 요리하세요</p>
         </motion.div>
 
         {/* 주문서 입력 */}
-        <motion.div
-          className="w-full"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-        >
+        <motion.div className="w-full">
           <TaskInput />
         </motion.div>
 
@@ -60,40 +55,30 @@ export default function HomePage() {
           {showRecipes && (
             <motion.div
               className="w-full mt-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
             >
-              <p className="text-xs text-center text-brown-light/60 mb-3">
-                🍽️ 레시피를 선택하세요
-              </p>
               <RecipeCarousel />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 후라이팬 + 점화 버튼 (레시피 선택 후) */}
-        <AnimatePresence>
-          {showPan && (
-            <motion.div
-              className="mt-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <PanPreview
-                recipeType={recipeType!}
-                recipeDuration={recipeDuration!}
-                onIgnite={handleIgnite}
-              />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* 하단 독바 */}
-      <BottomDock />
+      {/* 후라이팬 + 점화 버튼 (화면 중앙~하단) */}
+      <AnimatePresence>
+        {showPan && (
+          <PanPreview
+            recipeType={recipeType!}
+            recipeDuration={recipeDuration!}
+            onIgnite={handleIgnite}
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="z-20 mt-auto">
+        <BottomDock />
+      </div>
     </main>
   );
 }

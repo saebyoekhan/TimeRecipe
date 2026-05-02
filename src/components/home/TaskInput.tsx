@@ -10,16 +10,15 @@ export default function TaskInput() {
       <label className="block text-xs font-bold text-brown-light mb-2 tracking-wide uppercase">
         📋 주문서
       </label>
-      <div className="wood-card p-1">
+      <div className="paper-input p-2 relative">
         <input
           type="text"
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
-          placeholder="오늘 할 일을 적어주세요"
-          className="w-full px-4 py-3 bg-cream rounded-lg border-none
-                     text-neutral text-base placeholder:text-brown-light/40
-                     focus:outline-none
-                     transition-all duration-200"
+          placeholder="오늘 할 일을 적어주세요..."
+          className="w-full px-3 py-2 bg-transparent border-none
+                     text-black text-lg placeholder:text-black/30
+                     focus:outline-none"
           autoFocus
         />
       </div>

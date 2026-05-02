@@ -87,23 +87,23 @@ export default function CookingPage() {
   };
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 relative overflow-hidden counter-bg">
-      {/* 배경은 counter-bg 클래스의 이미지로 처리됨 */}
-
-      {/* 할일 이름 */}
+    <main className="flex-1 flex flex-col items-center justify-between relative overflow-hidden pixel-bg">
+      
+      {/* 상단 반투명 정보 바 */}
       <motion.div
-        initial={{ opacity: 0, y: -10 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="z-10 wood-card px-5 py-2"
+        className="absolute top-0 left-0 right-0 p-4 bg-black/50 backdrop-blur-sm z-20 border-b-4 border-wood-dark"
       >
-        <p className="text-sm font-medium text-brown text-center">
+        <p className="text-lg font-bold text-cream text-center text-pixel-stroke">
           {session.taskName}
         </p>
       </motion.div>
 
-      {/* 음식 프로그레스 */}
+      {/* 음식 프로그레스 (배경의 프라이팬 정중앙) */}
       <motion.div
-        className="z-10"
+        className="absolute z-10 pointer-events-none"
+        style={{ top: '48%', left: '50%', x: '-50%', y: '-50%' }}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 20 }}
@@ -115,8 +115,8 @@ export default function CookingPage() {
         />
       </motion.div>
 
-      {/* 하단: 타이머 + 정지 버튼 */}
-      <div className="flex flex-col items-center gap-5 z-10">
+      {/* 하단: 타이머 + 정지 버튼 (배경의 버너 손잡이 부근) */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-5 z-20 w-full px-6">
         <TimerDisplay
           elapsedSeconds={timer.elapsedSeconds}
           targetSeconds={session.targetSeconds}
