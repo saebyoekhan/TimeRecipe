@@ -59,6 +59,7 @@ function ResultContent() {
   const isGolden = record.status === 'golden';
   const needsReason = !isGolden && !reasonSaved;
 
+  return (
     <main className="flex-1 flex flex-col items-center justify-between py-12 px-6 relative pixel-bg">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-0" />
       
